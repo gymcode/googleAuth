@@ -1,26 +1,29 @@
 const express = require('express')
 const dotenv = require('dotenv')
 const mongoose = require('mongoose');
-
-// configuting the env
-dotenv.config()
-
-//imports
-const Register = require('./routes/register/register.js')
-
 const app = express(); 
 const PORT = process.env.PORT || 4000;
 
 // body parser
 app.use(express.json());
 
-app.use('/api/auth', Register)
+// configuting the env
+dotenv.config()
 
 //database stuff
-mongoose.connect(process.env.DB_CONNECT, {useNewUrlParser: true, useUnifiedTopology: true}, ()=>{
-    console.log("database connection established")
-})
+mongoose.connect(
+    process.env.DB_CONNECT, 
+    {useNewUrlParser: true, useUnifiedTopology: true},
+    () => console.log("Database connection established successfully")
+)
 
+//models
+require('./database/userModel.js')
+
+//imports
+const Register = require('./routes/register/register.js')
+
+app.use('/api/auth', Register)
 
 app.listen(PORT, (err)=>{
     if (err) throw err

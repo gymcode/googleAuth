@@ -19,6 +19,7 @@ const registerUser = async (req, res)=>{
    try {
 
     const savedUser = await user.save();
+    console.log(savedUser)
     res.send(savedUser)
 
    } catch (error) {
