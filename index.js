@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 4000;
 // body parser
 app.use(express.json());
 
-app.use('/signup', Register)
+app.use('/api/auth', Register)
 
 //database stuff
 mongoose.connect(process.env.DB_CONNECT, {useNewUrlParser: true, useUnifiedTopology: true}, ()=>{
