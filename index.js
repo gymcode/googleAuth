@@ -2,7 +2,7 @@ const express = require('express')
 const dotenv = require('dotenv')
 const mongoose = require('mongoose');
 const app = express(); 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 5000;
 
 // body parser
 app.use(express.json());
@@ -14,8 +14,9 @@ dotenv.config()
 mongoose.connect(
     process.env.DB_CONNECT, 
     {useNewUrlParser: true, useUnifiedTopology: true},
-    () => console.log("Database connection established successfully")
 )
+        .then(()=> console.log("database connection established successfully"))
+        .catch(err => console.error(err))
 
 //models
 require('./database/userModel.js')
