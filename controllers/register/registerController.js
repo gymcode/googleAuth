@@ -38,7 +38,7 @@ const registerUser = async (req, res)=>{
     }    
 
     const genSalt = await bcrypt.genSalt(10); 
-    const hashedPassword = await bcrypt.hash(password, genSalt);
+    const hashedPassword = await bcrypt.hash(password, genSalt);``
     
     const user = new User({
         firstname,
@@ -49,7 +49,7 @@ const registerUser = async (req, res)=>{
 
    try {
     const savedUser = await user.save();
-    res.status(400).send({
+    res.status(200).send({
         status: 'success',
         error: false,
         data: savedUser
