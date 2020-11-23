@@ -22,9 +22,9 @@ mongoose.connect(
 require('./database/userModel.js')
 
 //imports
-const Register = require('./routes/register/register.js')
+const WebRoutes = require('./routes/web.js')
 
-app.use('/api/auth', Register)
+app.use('/api/auth', WebRoutes)
 
 app.listen(PORT, (err)=>{
     if (err) throw err
