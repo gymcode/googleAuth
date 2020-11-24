@@ -8,13 +8,6 @@ const getlogin = async(req, res)=>{
 
 const login = async(req, res)=>{
     const {email, password} = req.body;
-    console.log(email)
-    console.log(password)
-
-    //validation check
-    // const {error, message} = loginCheck(email, password)
-    // console.log(error)
-    // if (error) res.status(406).send({status: "error",errorMessage: message})
 
     // checking is the user is already in the database
     const checkUser = await User.findOne({email})
