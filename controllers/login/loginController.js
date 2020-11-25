@@ -30,7 +30,8 @@ const login = async(req, res)=>{
         .json({
             status: "success", 
             message: "your are logged in bro", 
-            data: checkUser
+            data: checkUser,
+            token
         })
 
 }
