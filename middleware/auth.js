@@ -8,7 +8,7 @@ function auth(req, res, next){
 
     try {
         const tokenVerification = jwt.verify(token, process.env.TOKEN_SECRET)
-        if (tokenVerification) return res.status(403).send('token cannot be found')
+        if (!tokenVerification) return res.status(403).send('token cannot be found')
         req.auth = tokenVerification;
         next();
     } catch (error) {
