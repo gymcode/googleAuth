@@ -1,5 +1,6 @@
 const User = require('../../database/userModel'); 
 const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken');
 const {loginCheck} = require('../../validation/validator');
 
 const getlogin = async(req, res)=>{
@@ -17,11 +18,20 @@ const login = async(req, res)=>{
     const passwordCompare = await bcrypt.compare(password, checkUser.password)
     if(!passwordCompare) res.status(400).send({status: "error", errorMessage: "password does not match up"})
 
-    res.status(200).json({
-        status: "success", 
-        message: "your are logged in bro", 
-        data: checkUser
-    })
+    // generating the web token 
+    const token = jwt.sign({
+        id: checkUser._id, 
+        firstname: checkUser.firstname, 
+        email: checkUser.email 
+    }, process.env.TOKEN_SECRET, {expiresIn: "1h"});
+
+    res.header('auth-token', token)
+        .status(200)
+        .json({
+            status: "success", 
+            message: "your are logged in bro", 
+            data: checkUser
+        })
 
 }
 
