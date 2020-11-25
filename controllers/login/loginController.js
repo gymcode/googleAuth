@@ -23,7 +23,7 @@ const login = async(req, res)=>{
         id: checkUser._id, 
         firstname: checkUser.firstname, 
         email: checkUser.email 
-    }, process.env.TOKEN_SECRET, {expiresIn: "1h"});
+    }, process.env.TOKEN_SECRET);
 
     res.header('auth-token', token)
         .status(200)
